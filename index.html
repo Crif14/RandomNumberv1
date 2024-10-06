@@ -7,15 +7,32 @@
 </head>
 <body>
     <script>
+        function sanitize(domanda){
+            let sanitized = prompt(domanda)
+            sanitized = sanitized.trim()
+            sanitized =parseInt(sanitized)
+            while(sanitized===null || isNaN(sanitized)){
+                sanitized = prompt(domanda)
+                console.log("Valore non registrato")
+                sanitized = prompt(domanda)
+                sanitized = sanitized.trim()
+                sanitized = parseInt(sanitized)
+            }
+            return sanitized
+        }
+        function generateRandomInteger(min, max) {
+            let casualNumber = Math.random()
+            casualNumber = casualNumber * max 
+            casualNumber = parseInt(casualNumber)
+            return casualNumber
+        }
         let min = 0
         let life = 3
         let max = 0
-        let choise = prompt("Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)")
-        choise = parseInt(choise)
-        while(choise===null || choise===NaN || choise<1 || choise>3){
-            console.log("Valore non registrato")
-            choise = prompt("Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)")
-            choise = parseInt(choise)
+        let domanda = "Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)"
+        let choise = 0
+        while (choise<1 || choise>3){
+            choise = sanitize(domanda)
         }
         switch (choise){
             case 1:
@@ -28,17 +45,12 @@
                 max = 100
                 break
         }
-        let luckynumber=generateRandomInteger(0, max)
+        let luckynumber = generateRandomInteger(0, max)
         let guessed=false
         let i=life
         while(i>0 && guessed===false){
-            let luck = prompt("Inserire il numero, hai " + i + " vite")
-            luck = parseInt(luck)
-            while(luck===null || luck===NaN){
-                console.log("Valore non registrato")
-                luck = prompt("Inserire il numero, hai " + i + " vite")
-                luck = parseInt(luck)
-            }
+            domanda="Inserire il numero, hai " + i + " vite"
+            let luck = sanitize(domanda)
             i=i-1
             if(luck===luckynumber){
                 console.log("Bravo, hai indovinato")
@@ -50,12 +62,7 @@
         if(guessed===false){
             console.log("Mi spiace hai perso, il numero era "+ luckynumber)
         }
-        function generateRandomInteger(min, max) {
-            let casualNumber = Math.random()
-            casualNumber = casualNumber * max
-            casualNumber = parseInt(casualNumber)
-            return casualNumber
-        }
+
     </script>
 </body>
 </html>
