@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let min = 0
+        let life = 3
+        let max = 0
+        let choise = prompt("Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)")
+        choise = parseInt(choise)
+        while(choise===null || choise===NaN || choise<1 || choise>3){
+            console.log("Valore non registrato")
+            choise = prompt("Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)")
+            choise = parseInt(choise)
+        }
+        switch (choise){
+            case 1:
+                max = 10
+                break
+            case 2:
+                max = 50
+                break
+            case 3:
+                max = 100
+                break
+        }
+        let luckynumber=generateRandomInteger(0, max)
+        let guessed=false
+        let i=life
+        while(i>0 && guessed===false){
+            let luck = prompt("Inserire il numero, hai " + i + " vite")
+            luck = parseInt(luck)
+            while(luck===null || luck===NaN){
+                console.log("Valore non registrato")
+                luck = prompt("Inserire il numero, hai " + i + " vite")
+                luck = parseInt(luck)
+            }
+            i=i-1
+            if(luck===luckynumber){
+                console.log("Bravo, hai indovinato")
+                guessed=true
+            }else{
+                console.log("Non hai indovinato")
+            }
+        }
+        if(guessed===false){
+            console.log("Mi spiace hai perso, il numero era "+ luckynumber)
+        }
+        function generateRandomInteger(min, max) {
+            let casualNumber = Math.random()
+            casualNumber = casualNumber * max
+            casualNumber = parseInt(casualNumber)
+            return casualNumber
+        }
+    </script>
+</body>
+</html>
