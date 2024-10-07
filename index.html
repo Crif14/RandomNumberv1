@@ -9,15 +9,13 @@
     <script>
         function sanitize(domanda){
             let sanitized = prompt(domanda)
-            sanitized = sanitized.trim()
-            sanitized =parseInt(sanitized)
             while(sanitized===null || isNaN(sanitized)){
                 sanitized = prompt(domanda)
                 console.log("Valore non registrato")
                 sanitized = prompt(domanda)
-                sanitized = sanitized.trim()
-                sanitized = parseInt(sanitized)
             }
+            sanitized = sanitized.trim()
+            sanitized =parseInt(sanitized)
             return sanitized
         }
         function generateRandomInteger(min, max) {
@@ -26,28 +24,29 @@
             casualNumber = parseInt(casualNumber)
             return casualNumber
         }
-        function choises(){
+        function choises(domanda){
             let choise = 0
-        while (choise<1 || choise>3){
-            choise = sanitize(domanda)
-        }
-        switch (choise){
-            case 1:
-                max = 10
-                break
-            case 2:
-                max = 50
-                break
-            case 3:
-                max = 100
-                break
-        }
+            let max = 0
+            while (choise<1 || choise>3){
+                choise = sanitize(domanda)
+            }
+            switch (choise){
+                case 1:
+                    max = 10
+                    break
+                case 2:
+                    max = 50
+                    break
+                case 3:
+                    max = 100
+                    break
+            }
+            return max
         }
         let min = 1
         let life = 3
-        let max = choises()
         let domanda = "Inserire il livello di difficolta:\n1-Facile(1-10);\n2-Medio(1-50);\n3-Difficile(1-100)"
-        
+        let max = choises(domanda)
         let luckynumber = generateRandomInteger(min, max)
         let guessed=false
         let i=life
