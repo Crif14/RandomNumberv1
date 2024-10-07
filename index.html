@@ -22,15 +22,12 @@
         }
         function generateRandomInteger(min, max) {
             let casualNumber = Math.random()
-            casualNumber = casualNumber * max 
+            casualNumber = casualNumber * (max-min+1)+min
             casualNumber = parseInt(casualNumber)
             return casualNumber
         }
-        let min = 0
-        let life = 3
-        let max = 0
-        let domanda = "Inserire il livello di difficolta:\n1-Facile(0-10);\n2-Medio(0-50);\n3-Difficile(0-100)"
-        let choise = 0
+        function choises(){
+            let choise = 0
         while (choise<1 || choise>3){
             choise = sanitize(domanda)
         }
@@ -45,7 +42,13 @@
                 max = 100
                 break
         }
-        let luckynumber = generateRandomInteger(0, max)
+        }
+        let min = 1
+        let life = 3
+        let max = choises()
+        let domanda = "Inserire il livello di difficolta:\n1-Facile(1-10);\n2-Medio(1-50);\n3-Difficile(1-100)"
+        
+        let luckynumber = generateRandomInteger(min, max)
         let guessed=false
         let i=life
         while(i>0 && guessed===false){
